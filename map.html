@@ -7,17 +7,19 @@
         rel="stylesheet" 
         href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
     />
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-
-    <script
-        src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-    </script>
-    
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+	
+    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
 </head>
 <body>
+	<div>
+		<div id="map" style="top:100px; width: 600px; height: 400px"></div>
+		<div id="barplot" style="top:100px; width: 600px; height: 400px"></div>
 
-	<div id="map" style="width: 600px; height: 400px"></div>
-	<script type="text/javascript" src="circles.js"></script>
+	</div>
+	<script type="text/javascript" src="sensors.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
