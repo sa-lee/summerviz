@@ -10,25 +10,23 @@
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
 	
-    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+	<link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<h1 style="font-family:impact;color: grey" align="center">A little less pedestrian</h1>
 	<div>
-		<h1 style="font-family:impact;color: grey" align="center">A little less pedestrian</h1>
 		<div id="map" style="top:100px; width: 450px; height: 450px;
-		position: relative;border-top-left-radius: 500px;
-		border-top-right-radius: 500px;
-		border-bottom-right-radius: 500px;
-		border-bottom-left-radius: 500px;
+		border-radius: 50%;
 		padding: 30px"></div>
-		<div id="barplot" style="top:100px; width: 600px; height: 400px"></div>
-
+		<div id="barplot" style="top:100px; left: 500px; width: 600px; height: 450px; padding: 30px"></div>
 	</div>
 
-
-
+	<script type="text/javascript" src="utilities.js"></script>
 	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="query.js"></script>
 	<script type="text/javascript" src="map.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 	<script type="text/javascript" src="bar.js"></script>

@@ -23,7 +23,11 @@ function drawMap(inputData) {
     g = svg.append("g");
 
     /* Initialize tooltip */
-    tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.Sensor + "<br />" + "(" + d.Longitude + ", " + d.Latitude + ")"; });
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+        var lon = precisionRound(d.Longitude, 2);
+        var lat = precisionRound(d.Latitude, 2);
+        return d.Sensor + "<br />" + numberWithCommas(d.count) + " people"; 
+    });
 
     /* Invoke the tip in the context of your visualization */
     svg.call(tip)
@@ -34,25 +38,22 @@ function drawMap(inputData) {
             d.Latitude,
             d.Longitude
         )
+        d.count = query_year(query_sensor(dailyData, d.Sensor), "2017").map(d => +d.Count).reduce((x, y) => x + y);
     })
 
-    //
-    var myIcon = L.icon({
-    iconUrl: 'icon-north.png',
-    iconSize: [38, 95],
-    iconAnchor: [22, 94],
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
-    });
+
+
+    // create a radius scale
+    var rScale = d3.scale.linear().domain(d3.extent(inputData.map(d => d.count))).range([5, 15]);
+    544cd87db4931e66ef98c4538fbddf0d27281912
 
     // draw points
     var feature = g.selectAll("circle")
         .data(inputData)
         .enter().append("circle")
-        .style("stroke", "black")
-        .style("opacity", 1)
-        .style("fill", "green")
-        .attr("r", 5)
+        .style("opacity", 0.8)
+        .style("fill", "red")
+        .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
         .on('click', function(d){filter_by_sensor(d.Sensor)});

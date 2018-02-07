@@ -62,12 +62,3 @@ svg.on('click', function() {
     });
 
 
-/*svg.on('click', function() {
-        selections = ["Melbourne Central", "Alfred Place", "Flinders Street Station Underpass"];
-        index = Math.floor(Math.random() * 3);
-        console.log(selections[index]);
-        filter_by_sensor(selections[index]);
-        d3.selectAll("g > *").remove();
-
-    });
-*/
