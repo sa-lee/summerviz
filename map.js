@@ -9,6 +9,8 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
+    L.control.scale().addTo(map).setPosition('bottomright')
+
     /* Initialize the SVG layer */
     map._initPathRoot()
 
