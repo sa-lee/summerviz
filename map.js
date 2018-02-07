@@ -9,6 +9,11 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
+
+    document.getElementById('map').style.cursor = 'crosshair'
+    //document.getElementById('map').style.cursor = '' //(reset)
+
+
     /* Initialize the SVG layer */
     map._initPathRoot()
 
@@ -50,6 +55,10 @@ function drawMap(inputData) {
                 return "translate("+
                 map.latLngToLayerPoint(d.LatLng).x +","+
                 map.latLngToLayerPoint(d.LatLng).y +")";
+
+
+
+
             }
         )
     }
