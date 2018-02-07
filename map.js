@@ -1,5 +1,4 @@
 function drawMap(inputData) {
-    console.log(inputData);
     var map = L.map('map', {zoomControl:false}).setView([-37.81, 144.95], 14);
     mapLink =
     '<a href="http://www.arcgis.com">Stamen Design</a>';
