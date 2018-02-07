@@ -45,7 +45,7 @@ function drawMap(inputData) {
 
     // create a radius scale
     var rScale = d3.scale.linear().domain(d3.extent(inputData.map(d => d.count))).range([5, 15]);
-    544cd87db4931e66ef98c4538fbddf0d27281912
+    
 
     // draw points
     var feature = g.selectAll("circle")
@@ -56,7 +56,7 @@ function drawMap(inputData) {
         .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
-        .on('click', function(d){filter_by_sensor(d.Sensor)});
+        .on('click', function(d){console.log(d.Sensor)});
         
     map.on("viewreset", update);
     update();
