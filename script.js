@@ -10,3 +10,5 @@ d3.csv("./sensors.csv", function (error, data) {
     drawMap(sensorData);
 })
 
+console.log(dailyData);
+

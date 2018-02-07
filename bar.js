@@ -1,4 +1,5 @@
 
+
 filter_by_sensor = function(sensor_name) {
   d3.tsv("average_hourly_counts.tsv", function(d) {
   d.avg_count= +d.avg_count;
@@ -59,3 +60,14 @@ svg.on('click', function() {
         d3.selectAll("g > *").remove();
 
     });
+
+
+/*svg.on('click', function() {
+        selections = ["Melbourne Central", "Alfred Place", "Flinders Street Station Underpass"];
+        index = Math.floor(Math.random() * 3);
+        console.log(selections[index]);
+        filter_by_sensor(selections[index]);
+        d3.selectAll("g > *").remove();
+
+    });
+*/

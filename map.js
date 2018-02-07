@@ -36,6 +36,15 @@ function drawMap(inputData) {
         )
     })
 
+    //
+    var myIcon = L.icon({
+    iconUrl: 'icon-north.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+    });
+
     // draw points
     var feature = g.selectAll("circle")
         .data(inputData)
@@ -45,8 +54,9 @@ function drawMap(inputData) {
         .style("fill", "green")
         .attr("r", 5)
         .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
-
+        .on('mouseout', tip.hide)
+        .on('click', function(d){filter_by_sensor(d.Sensor)});
+        
     map.on("viewreset", update);
     update();
 
