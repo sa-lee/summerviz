@@ -34,7 +34,7 @@ function drawMap(inputData) {
             d.Latitude,
             d.Longitude
         )
-        d.count = query_sensor(dailyData, d.Sensor).map(d => +d.Count).reduce((x, y) => x + y);
+        d.count = query_year(query_sensor(dailyData, d.Sensor), "2017").map(d => +d.Count).reduce((x, y) => x + y);
     })
 
     // create a radius scale

@@ -1,4 +1,4 @@
-#map {
+/* #map {
     top:100px;
     width: 450px;
     height: 450px;
@@ -9,4 +9,15 @@
     border-bottom-left-radius: 500px;
     padding: 30px;
 }
+ */
 
+#mat {
+    position: absolute;
+    float: left;
+}
+
+
+#barplot {
+    position: absolute;
+    float: left;
+}
