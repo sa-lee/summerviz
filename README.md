@@ -10,6 +10,8 @@
 
 ### Installing live-server
 
-    git clone https://github.com/tapio/live-server
-    cd live-server
-    npm install -g
+    npm install -g live-server
+
+### Installing npm
+
+See https://www.npmjs.com/package/npm

@@ -1,0 +1,12 @@
+#map {
+    top:100px;
+    width: 450px;
+    height: 450px;
+    position: relative;
+    border-top-left-radius: 500px;
+    border-top-right-radius: 500px;
+    border-bottom-right-radius: 500px;
+    border-bottom-left-radius: 500px;
+    padding: 30px;
+}
+
