@@ -53,6 +53,7 @@ function drawMap(inputData) {
         .enter().append("circle")
         .style("opacity", 0.8)
         .style("fill", "red")
+        .style("cursor", "pointer")
         .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
