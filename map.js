@@ -9,6 +9,7 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
+    //change cursor to crosshair style in ID 'map'
     document.getElementById('map').style.cursor = 'crosshair'
     //document.getElementById('map').style.cursor = '' //(reset)
 
