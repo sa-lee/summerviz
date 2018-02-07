@@ -9,10 +9,10 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
-
     document.getElementById('map').style.cursor = 'crosshair'
     //document.getElementById('map').style.cursor = '' //(reset)
 
+    L.control.scale().addTo(map).setPosition('bottomright')
 
     /* Initialize the SVG layer */
     map._initPathRoot()
