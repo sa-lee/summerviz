@@ -58,7 +58,7 @@ function groupBySum(data, key) {
     var output = keys.map(k => {
         var obj = new Object;
         obj[key] = k;
-        obj["Count"] = Math.round(d3.mean(grouped[k].map(d => d.Count)))
+        obj["Count"] = Math.round(d3.sum(grouped[k].map(d => d.Count)))
         return obj;
     })
 

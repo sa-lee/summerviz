@@ -53,7 +53,7 @@ function drawMap(inputData) {
     })
 
     // create a radius scale
-    var rScale = d3.scale.linear().domain(d3.extent(dailyData.map(d => d.count))).range([5, 15]);
+    var rScale = d3.scale.linear().domain(d3.extent(sensorData.map(d => d.count))).range([5, 15]);
 
     // draw points
     var feature = g.selectAll("circle")
@@ -69,6 +69,13 @@ function drawMap(inputData) {
         .on('click', function(d){ 
             d3.select("#barplot").select("svg").select("g").remove();
             drawBar(d.Sensor, global_mode);
+
+            d3.select("#map").select("svg")
+                .selectAll("circle")
+                .style("fill", "red");
+
+            d3.select(this)
+                .style("fill", "yellow");
         });
         
     map.on("viewreset", update);
