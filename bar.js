@@ -33,7 +33,7 @@ drawBar = function(sensor_name, mode) {
     }
 
     // margins for bar
-    var margin = {top: 20, right: 20, bottom: 40, left: 40},
+    var margin = {top: 20, right: 20, bottom: 50, left: 80},
         width = +svg.attr("width") - margin.left - margin.left,
         height = +svg.attr("height") - margin.top - margin.bottom;
     
@@ -71,14 +71,42 @@ drawBar = function(sensor_name, mode) {
         .attr("class", "y axis")
         .call(yAxis);
     
-    g.append("text")
-        .attr("class", "x label")  
-        .attr("transform", "rotate(-90)")
-        .attr("x", -30)
-        .attr("y", 6)
-        .attr("dy", "0.7em")
-        .style("text-anchor", "bottom")
-        .text("Count")
+    if (mode == "daily") {
+        // text label for the x axis
+        g.append("text")             
+            .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .text("Hour (24h)");
+        g.append("text")
+            .attr("class", "x label")  
+            .attr("transform", "rotate(-90)")
+            .attr("x", -250)
+            .attr("y", -50)
+            .attr("dy", "0.7em")
+            .style("text-anchor", "bottom")
+            .text("Count")
+    } else {
+        g.append("text")
+            .attr("class", "x label")  
+            .attr("transform", "rotate(-90)")
+            .attr("x", -250)
+            .attr("y", -50)
+            .attr("dy", "0.7em")
+            .style("text-anchor", "bottom")
+            .text("Mean Daily Count")
+            if (mode == "monthly") {
+                g.append("text")             
+                    .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Day");
+            } else if (mode == "yearly") {
+                g.append("text")             
+                    .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Month");
+            }
+    }
+
     
     g.append("text")
         .attr("x", (width / 2))             

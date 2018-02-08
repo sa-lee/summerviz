@@ -14,6 +14,8 @@ d3.csv("./counts_all_2017.csv", function (error, data) {
     d3.csv("./sensors.csv", function (error, data) {
         sensorData = data;
         drawMap(sensorData);
+        updateMap("2017-01-01");
+        drawBar("State Library", global_mode);
     })
 })
 
