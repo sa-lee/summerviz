@@ -49,6 +49,6 @@ body {
 }
 
 .bar {
-  fill: red;
+  /* fill: red; */
   opacity: 0.8;
 }

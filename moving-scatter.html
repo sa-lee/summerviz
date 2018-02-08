@@ -79,7 +79,6 @@ d3.csv("counts_all_2017.csv", function(error, data) {
   data.forEach(function(d) {
     d.Day = +d.Day;
     d.Time = +d.Time;
-//    console.log(d);
   });
 
   // don't want dots overlapping axis, so add in buffer to data domain

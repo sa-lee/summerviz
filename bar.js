@@ -14,7 +14,6 @@ drawBar = function(sensor_name, mode) {
         currentData = groupBySum(currentData, "Day")
     } else if (mode == "yearly") {
         var year = get_year(date);
-        console.log(year)
         currentData = query_sensor(dailyDataGroupedByYear[year], sensor_name);
         currentData = groupBySum(currentData, "Month")
     }
@@ -27,8 +26,9 @@ drawBar = function(sensor_name, mode) {
 
     // x, y
     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05),
-        y = d3.scale.linear().range([height, 0]).nice();
-    
+        y = d3.scale.linear().range([height, 0]).nice(),
+        reds = d3.scaleOrdinal(d3.schemeReds[7]).domain(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+
     // axes 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -126,12 +126,19 @@ drawBar = function(sensor_name, mode) {
         .style("text-decoration", "underline")  
         .text(sensor_name);
 
-    g.selectAll(".bar")
+    var bars = g.selectAll(".bar")
         .data(currentData)
         .enter().append("rect")
-        .attr("class", "bar")
+
+    bars.attr("class", "bar")
         .attr("x", xVal)
         .attr("y", function(d) { return y(d.Count); })
         .attr("width", x.rangeBand())
-        .attr("height", function(d) { return height - y(d.Count); });
+        .attr("height", function(d) { return height - y(d.Count); })
+
+    if (mode != "monthly") {
+        bars.style("fill", d => "red");
+    } else {
+        bars.style("fill", d => reds(d.DayOfWeek))
+    }
 }
