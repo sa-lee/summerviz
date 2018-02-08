@@ -65,7 +65,10 @@ function drawMap(inputData) {
         .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
-        .on('click', function(d){console.log(d.Sensor)});
+        .on('click', function(d){ 
+            d3.select("#barplot").select("svg").select("g").remove();
+            drawBar(d.Sensor);
+        });
         
     map.on("viewreset", update);
     update();
