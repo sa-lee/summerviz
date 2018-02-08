@@ -1,11 +1,11 @@
 function drawMap(inputData) {
-    var map = L.map('map', {zoomControl:false}).setView([-37.81, 144.957], 14);
+    var map = L.map('map', {maxBounds:[ [-37.86, 144.907], [-37.76, 145.007] ], zoomControl:false}).setView([-37.81, 144.957], 14);
     mapLink =
     '<a href="http://www.arcgis.com">Stamen Design</a>';
     L.tileLayer(
         'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
         attribution: '&copy; ' + mapLink,
-        minZoom: 14,
+        minZoom: 12,
         maxZoom: 16
     }).addTo(map);
 
