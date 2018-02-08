@@ -53,7 +53,7 @@ function drawMap(inputData) {
     })
 
     // create a radius scale
-    var rScale = d3.scale.linear().domain(d3.extent(inputData.map(d => d.count))).range([5, 15]);
+    var rScale = d3.scale.linear().domain(d3.extent(dailyData.map(d => d.count))).range([5, 15]);
 
     // draw points
     var feature = g.selectAll("circle")
