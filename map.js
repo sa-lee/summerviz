@@ -9,8 +9,8 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
-    //change cursor to crosshair style in ID 'map'
-    document.getElementById('map').style.cursor = 'crosshair'
+    //change cursor to move style in ID 'map'
+    document.getElementById('map').style.cursor = 'move'
     //document.getElementById('map').style.cursor = '' //(reset)
 
     //adding scale at the bottom
@@ -51,11 +51,8 @@ function drawMap(inputData) {
         d.count = query_year(query_sensor(dailyData, d.Sensor), "2017").map(d => +d.Count).reduce((x, y) => x + y);
     })
 
-
-
     // create a radius scale
     var rScale = d3.scale.linear().domain(d3.extent(inputData.map(d => d.count))).range([5, 15]);
-    
 
     // draw points
     var feature = g.selectAll("circle")
@@ -89,3 +86,14 @@ function drawMap(inputData) {
 
 }
 
+function updateMap(date) {
+    for (var i = 0; i < sensorData.length; i++) {
+        var counts = query_date(dailyData, date)
+            .filter(d => d.Sensor == sensorData[i].Sensor)
+            .map(d => +d.Count);
+        sensorData[i].count = counts.length > 0 ? counts.reduce((x, y) => x + y) : 0;
+    }
+
+    var rScale = d3.scale.linear().domain(d3.extent(sensorData.map(d => d.count))).range([5, 15]);
+    d3.select("#map").selectAll("circle").attr("r", d => d.count > 0 ? rScale(d.count) : 0);
+}

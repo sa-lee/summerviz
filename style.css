@@ -2,7 +2,8 @@
     top:100px;
     width: 450px;
     height: 450px;
-    position: relative;
+    position: absolute;
+    float: left;
     border-top-left-radius: 500px;
     border-top-right-radius: 500px;
     border-bottom-right-radius: 500px;
@@ -10,13 +11,17 @@
     padding: 30px;
 }
 
-#map {
+#barplot {
     position: absolute;
     float: left;
 }
 
-
-#barplot {
+.slidecontainer {
     position: absolute;
-    float: left;
+    top: 650px;
+    left: 50px;
+}
+
+#myRange {
+    width: 400px;
 }

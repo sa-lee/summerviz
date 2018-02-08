@@ -21,3 +21,24 @@ function dateFromYMD(date) {
     var format = d3.time.format("%Y-%m-%d");
     return format.parse(date);
 }
+
+function dateToYMD(date) {
+    var format = d3.time.format("%Y-%m-%d");
+    return format(date);
+}
+
+// taken from https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
+function formatDate(date) {
+    var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
+    
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}

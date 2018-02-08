@@ -17,3 +17,7 @@ function query_day(data, day) {
 function query_time(data, time) {
     return _.filter(data, d => { return d.Time == time })
 }
+
+function query_date(data, date) {
+    return _.filter(data, d => { return d.Date == date })
+}
