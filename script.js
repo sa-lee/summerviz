@@ -10,7 +10,15 @@ d3.csv("./counts_all_2017.csv", function (error, data) {
     })
 })
 
+// $(document).ready(function()
+// {
+//     $("#circleslider3").tinycircleslider({
+//         dotsSnap : true
+//     ,   radius   : 170
+//     ,   dotsHide : false
+//     });
 
+//     $("#circleslider3").find("a").fancybox();
 
-console.log(dailyData);
+// });
 

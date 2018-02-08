@@ -13,7 +13,17 @@ function drawMap(inputData) {
     document.getElementById('map').style.cursor = 'crosshair'
     //document.getElementById('map').style.cursor = '' //(reset)
 
+    //adding scale at the bottom
     L.control.scale().addTo(map).setPosition('bottomright')
+
+    //adding the north arrow
+    var north = L.control({position: "bottomleft"});
+    north.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "info legend");
+    div.innerHTML = '<img src="icons/icon-north2.png">';
+    return div;
+    }
+    north.addTo(map);
 
     /* Initialize the SVG layer */
     map._initPathRoot()
