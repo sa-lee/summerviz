@@ -9,7 +9,21 @@ function drawMap(inputData) {
         maxZoom: 16
     }).addTo(map);
 
+    //change cursor to crosshair style in ID 'map'
+    document.getElementById('map').style.cursor = 'crosshair'
+    //document.getElementById('map').style.cursor = '' //(reset)
+
+    //adding scale at the bottom
     L.control.scale().addTo(map).setPosition('bottomright')
+
+    //adding the north arrow
+    var north = L.control({position: "bottomleft"});
+    north.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "info legend");
+    div.innerHTML = '<img src="icons/icon-north2.png">';
+    return div;
+    }
+    north.addTo(map);
 
     /* Initialize the SVG layer */
     map._initPathRoot()
@@ -37,8 +51,11 @@ function drawMap(inputData) {
         d.count = query_year(query_sensor(dailyData, d.Sensor), "2017").map(d => +d.Count).reduce((x, y) => x + y);
     })
 
+
+
     // create a radius scale
     var rScale = d3.scale.linear().domain(d3.extent(inputData.map(d => d.count))).range([5, 15]);
+    
 
     // draw points
     var feature = g.selectAll("circle")
@@ -47,10 +64,12 @@ function drawMap(inputData) {
         .style("opacity", 0.8)
         .style("stroke", "black")
         .style("fill", "red")
+        .style("cursor", "pointer")
         .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
-        .on('mouseout', tip.hide); 
-
+        .on('mouseout', tip.hide)
+        .on('click', function(d){console.log(d.Sensor)});
+        
     map.on("viewreset", update);
     update();
 
@@ -60,6 +79,10 @@ function drawMap(inputData) {
                 return "translate("+
                 map.latLngToLayerPoint(d.LatLng).x +","+
                 map.latLngToLayerPoint(d.LatLng).y +")";
+
+
+
+
             }
         )
     }
