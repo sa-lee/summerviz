@@ -5,7 +5,7 @@ function drawMap(inputData) {
     L.tileLayer(
         'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
         attribution: '&copy; ' + mapLink,
-        minZoom: 10,
+        minZoom: 14,
         maxZoom: 16
     }).addTo(map);
 
@@ -45,10 +45,11 @@ function drawMap(inputData) {
         .data(inputData)
         .enter().append("circle")
         .style("opacity", 0.8)
+        .style("stroke", "black")
         .style("fill", "red")
         .attr("r", d => rScale(d.count))
         .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
+        .on('mouseout', tip.hide); 
 
     map.on("viewreset", update);
     update();
