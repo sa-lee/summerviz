@@ -19,5 +19,5 @@ function query_time(data, time) {
 }
 
 function query_date(data, date) {
-    return _.filter(data, d => { return d.Date == date })
+    return dailyDataGroupedByDate[date]
 }
