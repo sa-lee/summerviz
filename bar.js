@@ -20,23 +20,11 @@ drawBar = function(sensor_name, mode) {
     }
 
     var svg = d3.select("#barplot").select("svg");
-    if (currentData.length == 0) {
-        var textSel = svg.append("text")
-        textSel.html("Sensor Down")
-            .attr("class", "sensor-down")
-            .attr("x", 250)
-            .attr("y", 250)
-            .attr("font-size", "2em");
-        return;
-    } else {
-        svg.selectAll("text.sensor-down").remove()
-    }
-
     // margins for bar
     var margin = {top: 20, right: 20, bottom: 50, left: 80},
         width = +svg.attr("width") - margin.left - margin.left,
         height = +svg.attr("height") - margin.top - margin.bottom;
-    
+
     // x, y
     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05),
         y = d3.scale.linear().range([height, 0]).nice();
@@ -44,6 +32,28 @@ drawBar = function(sensor_name, mode) {
     // axes 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    if (currentData.length == 0) {
+        var textSel = g.append("text")
+        textSel.html("Sensor Down")
+            .attr("class", "sensor-down")
+            .attr("x", (width / 2) - margin.left)
+            .attr("y", 250)
+            .attr("font-size", "2em");
+
+        g.append("text")
+            .attr("class", "sensor-down")
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 3))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text(sensor_name);
+        return;
+    } else {
+        g.selectAll("text.sensor-down").remove()
+    }
+    
     
     max_y =  d3.max(currentData, function(d) { return +d.Count; });
     
@@ -81,7 +91,7 @@ drawBar = function(sensor_name, mode) {
             .attr("class", "x label")  
             .attr("transform", "rotate(-90)")
             .attr("x", -250)
-            .attr("y", -50)
+            .attr("y", -65)
             .attr("dy", "0.7em")
             .style("text-anchor", "bottom")
             .text("Count")
@@ -90,10 +100,10 @@ drawBar = function(sensor_name, mode) {
             .attr("class", "x label")  
             .attr("transform", "rotate(-90)")
             .attr("x", -250)
-            .attr("y", -50)
+            .attr("y", -65)
             .attr("dy", "0.7em")
             .style("text-anchor", "bottom")
-            .text("Mean Daily Count")
+            .text("Total Count")
             if (mode == "monthly") {
                 g.append("text")             
                     .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
@@ -107,7 +117,7 @@ drawBar = function(sensor_name, mode) {
             }
     }
 
-    
+
     g.append("text")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top / 3))
