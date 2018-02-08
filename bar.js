@@ -1,58 +1,69 @@
-drawBar = function(inputData) {
-  console.log(inputData);
+drawBar = function(sensor_name) {
+  
+  // get the selected date
+  var slider = document.getElementById("myRange");
+  var date = dateToYMD(dateFromDay(2017, slider.value));
 
-  var  bardiv = d3.select("#barplot");
-  console.log(bardiv);
-  var  svg = bardiv.append("svg");
+  var currentData = query_sensor(dailyDataGroupedByDate[date], sensor_name);
 
-  var  margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
+  
+  console.log(currentData);
+
+  var  svg = d3.select("#barplot").select("svg");
+  console.log(svg);
+  // margins for bar
+  var  margin = {top: 20, right: 20, bottom: 40, left: 40},
        width = +svg.attr("width") - margin.left - margin.left,
        height = +svg.attr("height") - margin.top - margin.bottom;
+
+  // x, y
+  var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05),
+      y = d3.scale.linear().range([height, 0]).nice();
+
+  // axes 
+
 
   var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-      y = d3.scaleLinear().rangeRound([height, 0]);
+  max_y =  d3.max(currentData, function(d){ return +d.Count;});
 
-  max_y =  d3.max(inputData, function(d){ return d.avg_count;});
-  x.domain(inputData.map(function(d) { return d.hour; }));
-  y.domain([0, max_y]);
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+  var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+  x.domain(currentData.map(function(d) { return d.Time; }));
+  y.domain([0, max_y*1.2]);
+  
 
   g.append("g")
-      .attr("class", "axis axis--x")
+      .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(xAxis);
+
+ 
 
   g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y))
+      .attr("class", "y axis")
+      .call(yAxis);
 
   g.append("text")
       .attr("class", "x label")  
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", "0.7em")
-      .style("text-anchor", "end")
-      .text("Count");      
+      .style("text-anchor", "bottom")
+      .text("Count")
 
 
   g.selectAll(".bar")
-    .data(inputData)
+    .data(currentData)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.hour); })
-      .attr("y", function(d) { return y(d.avg_count); })
-      .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.avg_count); });
-
+      .attr("x", function(d) { return x(d.Time); })
+      .attr("y", function(d) { return y(d.Count); })
+      .attr("width", x.rangeBand())
+      .attr("height", function(d) { return height - y(d.Count); });
 }
-// svg.on('click', function() {
-//         selections = ["Melbourne Central", "Alfred Place", "Flinders Street Station Underpass"];
-//         index = Math.floor(Math.random() * 3);
-//         console.log(selections[index]);
-//         filter_by_sensor(selections[index]);
-//         d3.selectAll("g > *").remove();
 
-//     });
+
 
