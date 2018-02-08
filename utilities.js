@@ -42,3 +42,25 @@ function formatDate(date) {
     
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
+
+function get_month(date) {
+    return dateFromYMD(date).getMonth() + 1;
+}
+
+function get_year(date) {
+    return dateFromYMD(date).getYear() + 1900;
+}
+
+function groupBySum(data, key) {
+    var grouped = _.groupBy(data, d => d[key])
+    var keys = Object.keys(grouped)
+
+    var output = keys.map(k => {
+        var obj = new Object;
+        obj[key] = k;
+        obj["Count"] = Math.round(d3.mean(grouped[k].map(d => d.Count)))
+        return obj;
+    })
+
+    return output;
+}

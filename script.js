@@ -7,6 +7,9 @@ d3.csv("./counts_all_2017.csv", function (error, data) {
     dailyData = _.filter(dailyData, d => { return d.Count != "NA" });
 
     dailyDataGroupedByDate =  _.groupBy(dailyData, d => d.Date);
+    dailyDataGroupedByDay =  _.groupBy(dailyData, d => d.Day);
+    dailyDataGroupedByMonth =  _.groupBy(dailyData, d => d.Month);
+    dailyDataGroupedByYear =  _.groupBy(dailyData, d => d.Year);
     
     d3.csv("./sensors.csv", function (error, data) {
         sensorData = data;

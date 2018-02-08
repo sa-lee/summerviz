@@ -24,6 +24,16 @@
 		</div>
 		<div id="barplot" style="top:100px; left: 500px; width: 600px; height: 450px; padding: 30px">
 			<svg width="600" height="450"></svg>
+			<div style="position:relative;left:150px">
+				<input class="mode-radio" type="radio" id="modeChoice1" name="contact" value="daily" checked>
+				<label for="modeChoice1">Daily</label>
+	
+				<input class="mode-radio" type="radio" id="modeChoice2" name="contact" value="monthly">
+				<label for="modeChoice2">Monthly</label>
+	
+				<input class="mode-radio" type="radio" id="modeChoice3" name="contact" value="yearly">
+				<label for="modeChoice3">Yearly</label>
+			</div>
 		</div>
 	</div>
 	<div class="slidecontainer">
@@ -38,13 +48,26 @@
 	<script type="text/javascript" src="script.js"></script>
 
 	<script>
+		var global_dummy;
+		var global_sensor;
 		var slider = document.getElementById("myRange");
+		var global_mode = "daily";
 		d3.select("#slider-title").html(formatDate(dateFromDay(2017, slider.value)));
 		slider.oninput = function() {
 			var date = dateFromDay(2017, this.value);
 			d3.select("#slider-title").html(formatDate(date));
 			updateMap(dateToYMD(date));
+			d3.select("#barplot").select("svg").select("g").remove();
+			drawBar(global_sensor, global_mode);
 		}
+
+		// Bind radio actions
+		d3.selectAll(".mode-radio")
+			.on("click", function(d) {
+				global_mode = d3.select(this).node().value;
+				d3.select("#barplot").select("svg").select("g").remove();
+				drawBar(global_sensor, global_mode);
+			})
 	</script>
 </body>
 </html>

@@ -1,13 +1,14 @@
 function drawMap(inputData) {
     var map = L.map('map', {maxBounds:[ [-37.86, 144.907], [-37.76, 145.007] ], zoomControl:false}).setView([-37.81, 144.957], 14);
-    mapLink =
-    '<a href="http://www.arcgis.com">Stamen Design</a>';
+    mapLink = '<a href="http://www.arcgis.com">Stamen Design</a>';
     L.tileLayer(
-        'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
-        attribution: '&copy; ' + mapLink,
-        minZoom: 12,
-        maxZoom: 16
-    }).addTo(map);
+        'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', 
+        {
+            attribution: '&copy; ' + mapLink,
+            minZoom: 12,
+            maxZoom: 16
+        }
+    ).addTo(map);
 
     //change cursor to move style in ID 'map'
     document.getElementById('map').style.cursor = 'move'
@@ -19,9 +20,9 @@ function drawMap(inputData) {
     //adding the north arrow
     var north = L.control({position: "bottomleft"});
     north.onAdd = function(map) {
-    var div = L.DomUtil.create("div", "info legend");
-    div.innerHTML = '<img src="icons/icon-north2.png">';
-    return div;
+        var div = L.DomUtil.create("div", "info legend");
+        div.innerHTML = '<img src="icons/icon-north2.png">';
+        return div;
     }
     north.addTo(map);
 
@@ -67,7 +68,7 @@ function drawMap(inputData) {
         .on('mouseout', tip.hide)
         .on('click', function(d){ 
             d3.select("#barplot").select("svg").select("g").remove();
-            drawBar(d.Sensor);
+            drawBar(d.Sensor, global_mode);
         });
         
     map.on("viewreset", update);
@@ -79,10 +80,6 @@ function drawMap(inputData) {
                 return "translate("+
                 map.latLngToLayerPoint(d.LatLng).x +","+
                 map.latLngToLayerPoint(d.LatLng).y +")";
-
-
-
-
             }
         )
     }
