@@ -11,11 +11,11 @@ drawBar = function(sensor_name, mode) {
     } else if (mode == "monthly") {
         var month = get_month(date);
         currentData = query_sensor(dailyDataGroupedByMonth[month], sensor_name);
-        currentData = groupBySum(currentData, "Day")
+        currentData = groupByMean(currentData, "Day")
     } else if (mode == "yearly") {
         var year = get_year(date);
         currentData = query_sensor(dailyDataGroupedByYear[year], sensor_name);
-        currentData = groupBySum(currentData, "Month")
+        currentData = groupByMean(currentData, "Month")
     }
 
     var svg = d3.select("#barplot").select("svg");
@@ -103,7 +103,7 @@ drawBar = function(sensor_name, mode) {
             .attr("y", -65)
             .attr("dy", "0.7em")
             .style("text-anchor", "bottom")
-            .text("Total Count")
+            .text("Mean Hourly Count")
             if (mode == "monthly") {
                 g.append("text")             
                     .attr("transform", "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")

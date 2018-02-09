@@ -68,3 +68,22 @@ function groupBySum(data, key) {
     })
     return output;
 }
+
+function groupByMean(data, key) {
+    var grouped = _.groupBy(data, d => d[key])
+    var keys = Object.keys(grouped)
+
+    
+    var output = keys.map(k => {
+        var obj = new Object;
+        obj[key] = k;
+        obj["Count"] = Math.round(d3.mean(grouped[k].map(d => d.Count)))
+        if (key == "Day") {
+            var DayOfWeek = grouped[k][0].DayOfWeek
+            obj.DayOfWeek = DayOfWeek
+        }
+        return obj;
+    })
+    return output;
+}
+
